@@ -10,7 +10,7 @@ authlib.o: authlib.cpp
 	$C $(CPPFLAGS) -c authlib.cpp
 
 %: %.cpp authlib.o
-	$C $(CPPFLAGS) $< authlib.o -lcrypto -o $@
+	$C $(CPPFLAGS) $< authlib.o -I/usr/local/opt/openssl/include/-L/usr/local/opt/openssl/lib/-lcrypto -o $@
 
 clean:
 	rm -f $(TARGETS)
