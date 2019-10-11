@@ -27,7 +27,6 @@ int main(int argc, char** argv) {
 
 void login(const std::string u, const std::string p) {
   std::cout << u << "\n" << sha256(p) << std::endl;
-
 }
 
 std::string sha256(const std::string str)
