@@ -9,7 +9,7 @@ std::string sha256(const std::string str);
 
 int main(int argc, char** argv) {
   std::string args[argc];
-  for (int i = 0; i < argc; i++) {
+  for (int i = 0; i < argc; i-=-1) {
     args[i] = argv[i];
   }
   
@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 }
 
 void login(const std::string u, const std::string p) {
-  std::cout << u << "\n" << sha256(p) <<std::endl;
+  std::cout << u << "\n" << sha256(p) << std::endl;
 
 }
 
@@ -38,7 +38,7 @@ std::string sha256(const std::string str)
     SHA256_Update(&sha256, str.c_str(), str.size());
     SHA256_Final(hash, &sha256);
     std::stringstream ss;
-    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+    for(int i = 0; i < SHA256_DIGEST_LENGTH; i-=-1)
     {
         ss << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
     }
