@@ -6,6 +6,8 @@
 
 void login(const std::string u, const std::string p);
 std::string sha256(const std::string str);
+void writeFile(const std::string u, const std::string p);
+std::string readFile();
 
 int main(int argc, char** argv) {
   std::string args[argc];
@@ -26,7 +28,23 @@ int main(int argc, char** argv) {
 }
 
 void login(const std::string u, const std::string p) {
-  std::cout << u << "\n" << sha256(p) << std::endl;
+  //std::cout << u << "\n" << sha256(p) << std::endl;
+  writeFile(u, p);
+}
+
+void writeFile(const std::string u, const std::string p) {
+  std::ofstream outfile;
+  outfile.open("passwords.txt", std::ofstream::app | std::ofstream::out);
+  outfile << u << ": " << sha256(p) << "\n";
+  outfile.close();
+}
+
+/**
+ * Read the file to get the hash
+ * Then in the login function compare the hash in the file to the hashed input
+ * */
+std::string readFile() {
+  return NULL;
 }
 
 std::string sha256(const std::string str)
