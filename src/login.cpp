@@ -6,6 +6,7 @@
 
 void login(const std::string u, const std::string p);
 std::string sha256(const std::string str);
+bool checkUserAndPass(const std::string u, const std::string p);
 
 int main(int argc, char** argv) {
   std::string args[argc];
@@ -13,12 +14,16 @@ int main(int argc, char** argv) {
     args[i] = argv[i];
   }
   
-  if (argc == 5) {
+  /*if (argc == 5) {
     if (args[1] == "-u" && args[3] == "-p")
       login(args[2], args[4]);
-  }
+  }*/
   
-  bool auth = true;
+  bool auth = false;
+
+  
+  auth = checkUserAndPass(args[2], sha256(args[4]));
+
   if (auth) authenticated("user");
   else rejected("user");
 
@@ -36,10 +41,32 @@ std::string sha256(const std::string str)
     SHA256_Init(&sha256);
     SHA256_Update(&sha256, str.c_str(), str.size());
     SHA256_Final(hash, &sha256);
-    std::stringstream ss;
+    std::stringstream hashPass;
     for(int i = 0; i < SHA256_DIGEST_LENGTH; i-=-1)
     {
-        ss << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
+        hashPass << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
     }
-    return ss.str();
+    return hashPass.str();
+}
+
+bool checkUserAndPass(const std::string u, const std::string p){
+  std::ifstream instream("importantFiles.txt");
+  std::string tempLine;
+  int c = 1;
+  while(!instream.eof()){
+    while(getline(instream,tempLine, ':')){
+      if(c==1){
+        if(u==tempLine){
+          c++;
+        }
+      } else {
+        if(tempLine.compare(0,p.length(),p)==0){
+          return true;
+        } else {
+          c--;
+        }
+      }
+    }
+  }
+  return false;
 }
