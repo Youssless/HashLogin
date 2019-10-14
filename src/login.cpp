@@ -26,12 +26,16 @@ int main(int argc, char** argv) {
 }
 
 void login(const std::string u, const std::string p) {
+<<<<<<< HEAD
   //std::cout << u << "\n" << sha256(p) << std::endl;
 
   std::ofstream outfile;
   outfile.open("passwords.txt");
   outfile << u << ": " << sha256(p);
   outfile.close();
+=======
+  std::cout << u << "\n" << sha256(p) << std::endl;
+>>>>>>> e8ebac63f27b7c3cdfc57402b9399ca8aa383afd
 }
 
 std::string sha256(const std::string str)
