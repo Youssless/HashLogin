@@ -36,7 +36,6 @@ void writeFile(const std::string u, const std::string p) {
   std::ofstream outfile;
   outfile.open("passwords.txt", std::ofstream::app | std::ofstream::out);
   outfile << u << ": " << sha256(p) << "\n";
-  outfile.close();
 }
 
 /**
