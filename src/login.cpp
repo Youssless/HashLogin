@@ -34,8 +34,8 @@ void login(const std::string u, const std::string p) {
 
 void writeFile(const std::string u, const std::string p) {
   std::ofstream outfile;
-  outfile.open("passwords.txt");
-  outfile << u << ": " << sha256(p);
+  outfile.open("passwords.txt", std::ofstream::app | std::ofstream::out);
+  outfile << u << ": " << sha256(p) << "\n";
   outfile.close();
 }
 
@@ -44,7 +44,7 @@ void writeFile(const std::string u, const std::string p) {
  * Then in the login function compare the hash in the file to the hashed input
  * */
 std::string readFile() {
-  
+  return NULL;
 }
 
 std::string sha256(const std::string str)
