@@ -3,10 +3,10 @@
 #include <sstream>
 #include <fstream>
 #include <iomanip>
-#include <iostream>
-#include <string.h>
-#include <string>
-#include <cassert>
+#include <iostream> 
+#include <string.h> 
+#include <string>  
+#include <cassert>  
 //g++ -o login  login.cpp -lssl -lcrypto
 
 std::string sha256(const std::string str);
@@ -34,7 +34,6 @@ void MainMenu(){
       std::cin >> choice ;
     }
     if(choice == 0){
-      std::cout << "test choose 3\n";
         exit(1);
     }
     else if(choice == 1){
@@ -54,17 +53,17 @@ void Login() {
   std::cout << "test\n";
   std::cout << "Value of hashpassword is : " << sha256(p) ;
   std::cout << "\nThe password files is  : \n";
-    ssttd::ifream infile;
-    infile.open("passwords.txt");
-    //std::assert("passwords.txt");
+    ssttd::ifream infile; 
+    infile.open("passwords.txt");  
+    //std::assert("passwords.txt");  
 
     std::string s;
     while(getline(infile,s))
     {
         std::cout<<s<<"\n";
     }
-    infile.close();
-
+    infile.close();             
+    
 
   bool auth = false;
   if (auth) authenticated("user");
@@ -72,13 +71,13 @@ void Login() {
   */
 
       bool auth = false;
- std::cout << "test choose 1\n";
+ //std::cout << "test choose 1\n";
       char username[50],lineInformation[200];
-      std::string password,checkpassword=lineInformation;
+      std::string password;
       std::ifstream infile;
       infile.open("pwdb.txt");
-
-
+      
+           
       std::cout << "\t\t\t     Welcome to the Login!\n" << std::endl;
 
 
@@ -102,21 +101,27 @@ void Login() {
       std::cout << "\t\t\t Please input your password: " ;
       std::cin >>password;
       password=sha256(password);
-      checkpassword=checkpassword.substr(strlen(username)+1,strlen(username)+65);
+      std::string checkpassword=lineInformation;
+      checkpassword=checkpassword.substr(strlen(username)+2,strlen(username)+59);  
 
-      if(password==checkpassword) auth = true;
+       //std::cout << checkpassword << std::endl;
+       //std::cout << password << std::endl;
+
+      if(password.compare(checkpassword)==0) 
+        auth = true;
+
       else {
         std::cout <<"\t\t\tYour password is wrong!\n"<< std::endl;
         MainMenu();
       }
-      infile.close();
- std::cout << "test choose 1-2\n";
+      infile.close(); 
+ //std::cout << "test choose 1-2\n";   
       if (auth) authenticated(username);
       else rejected(username);
 }
 
 void Register(){
-    std::cout << "test choose 2\n";
+    //std::cout << "test choose 2\n";
       std::string username,password="1",passwordC="2";
       std::cout << "\t\t\t     Welcome to the Register!\n" << std::endl;
       std::cout << "\t\t\t Please input your username: " ;
@@ -153,17 +158,17 @@ std::string readFile(const std::string u, const std::string p) {
   std::cout << "test";
   std::cout << "Value of hashpassword is : " << sha256(p) ;
   std::cout << "The password files is  : ";
-    std::ifstream infile;
-    infile.open("passwords.txt");
-    //std::assert("passwords.txt");
+    std::ifstream infile; 
+    infile.open("passwords.txt");   
+    //std::assert("passwords.txt");   
 
     std::string s;
     while(getline(infile,s))
     {
         std::cout<<s;
     }
-    infile.close();
-
+    infile.close();           
+    
   return p;
 }*/
 
