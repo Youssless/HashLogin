@@ -38,7 +38,6 @@ void login(const std::string u, const std::string p) {
     if (readusr == u && readpass == pass)
       auth = true;
   }
-
   if (auth) 
     authenticated(u);
   else 
