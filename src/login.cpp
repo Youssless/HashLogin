@@ -19,9 +19,6 @@ int main(int argc, char** argv) {
     if (args[1] == "-u" && args[3] == "-p")
       login(args[2], args[4]);
   }
-  
-  
-
   return 0;
 }
 
@@ -37,7 +34,6 @@ void login(const std::string u, const std::string p) {
     if (readusr == u && readpass == pass)
       auth = true;
   }
-
   if (auth) 
     authenticated(u);
   else 
