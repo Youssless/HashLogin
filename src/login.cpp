@@ -19,31 +19,25 @@ int main(int argc, char** argv) {
     if (args[1] == "-u" && args[3] == "-p")
       login(args[2], args[4]);
   }
-  
-  bool auth = true;
-  if (auth) authenticated("user");
-  else rejected("user");
-
   return 0;
 }
 
 void login(const std::string u, const std::string p) {
-  //std::cout << u << "\n" << sha256(p) << std::endl;
-  writeFile(u, p);
-}
-
-void writeFile(const std::string u, const std::string p) {
-  std::ofstream outfile;
-  outfile.open("passwords.txt", std::ofstream::app | std::ofstream::out);
-  outfile << u << ": " << sha256(p) << "\n";
-}
-
-/**
- * Read the file to get the hash
- * Then in the login function compare the hash in the file to the hashed input
- * */
-std::string readFile() {
-  return NULL;
+  bool auth = false;
+  std::ifstream infile("pwdb.txt");
+  std::string pass = sha256(p);
+  std::string line;
+  
+  while (std::getline(infile, line)) {
+    std::string readusr = line.substr(0, u.length());
+    std::string readpass = line.substr(u.length()+1, pass.length()); 
+    if (readusr == u && readpass == pass)
+      auth = true;
+  }
+  if (auth) 
+    authenticated(u);
+  else 
+    rejected(u);
 }
 
 std::string sha256(const std::string str)
