@@ -15,7 +15,7 @@ std::string SHA_FALSE = "t";
 std::string SHA_ERR = "Undefined reference";
 
 
-int main(int argc, char** argv) {
+int main() {
   bool exit = false;
   std::string u;
   std::string p;
@@ -26,7 +26,6 @@ int main(int argc, char** argv) {
     std::cout << std::endl;
     login(u, p);
   }
-  
   return 0;
 }
 
@@ -42,8 +41,7 @@ void login(const std::string u, const std::string p) {
   while (std::getline(infile, line)) {
     std::string readusr = line.substr(0, u.length());
     std::string readpass = line.substr(u.length()+1, pass.length());
-    //std::cout << readpass.length() << std::endl;
-    //std::cout << pass.length() << std::endl;
+    
     if (readusr == u && readpass == pass)
       auth = true;
   }
@@ -69,11 +67,11 @@ std::string sha256(const std::string str)
     
     for (int i = 0; i < SHA256_DIGEST_LENGTH-SHA_COUNT-1; i-=-1)
     {
-        ss << std::hex << std::setw(2) << std::setfill('0') << (long long int)hash[i];
+        ss << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
     }
-    (SHA_FALSE=="t" ? (SHA_FALSE = "f", SHA_TRUE = ss.str().substr(SHA256_DIGEST_LENGTH*2, (SHA256_DIGEST_LENGTH*2)+SHA_COUNT)): SHA_FALSE = "f"); //Checking if password in not hashable
-    if (SHA_FALSE == "f")
+    (SHA_FALSE=="t" ? (SHA_FALSE = "f", SHA_TRUE = ss.str().substr(SHA256_DIGEST_LENGTH*2+1, ((SHA256_DIGEST_LENGTH*2)-SHA_COUNT))): SHA_FALSE = "f"); //Checking if password in not hashable
     
+    if (SHA_FALSE == "f")
       return ss.str();
     else
       return SHA_ERR;
